@@ -1,5 +1,3 @@
-// build.gradle.kts
-
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.kotlin.dsl.invoke
 import org.gradle.kotlin.dsl.kotlin
@@ -29,6 +27,7 @@ repositories {
     maven("https://repo.purpurmc.org/snapshots/")
     maven("https://repo.aikar.co/content/groups/aikar/")
     maven("https://repo.phoenix616.dev/")
+    maven("https://repo.townyadvanced.com/repository/maven-public/") // Towny Repo
 }
 
 dependencies {
@@ -40,7 +39,7 @@ dependencies {
 
     // Dependencias esenciales de Mythic Tree & MMOItems
     compileOnly("io.lumine:Mythic-Dist:5.9.0")
-    compileOnly("net.Indyuce:MMOItems:6.7.3")  // updated to latest available version  // fixed version, repository added
+    compileOnly("net.Indyuce:MMOItems:6.7.3")
 
     // Plugins comunes
     compileOnly("me.clip:placeholderapi:2.10.10")
@@ -51,8 +50,15 @@ dependencies {
     implementation("com.zaxxer:HikariCP:5.0.1")
 
     // ACF (comandos)
-    compileOnly("co.aikar:acf-paper:0.5.0-SNAPSHOT")
+    compileOnly("co.aikar:acf-paper:0.5.1-SNAPSHOT")
     // ACF locales: se incluye automáticamente con acf-paper; no es necesario dependencia separada
+
+    // Other missing dependencies
+    compileOnly("com.github.TownyAdvanced:Towny:0.101.1.10")
+    compileOnly("com.frengor:ultimateadvancementapi:2.5.1")
+    compileOnly("net.wesjd:anvilgui:1.10.6-SNAPSHOT")
+// https://mvnrepository.com/artifact/com.cjcrafter/foliascheduler
+    implementation("com.cjcrafter:foliascheduler:0.7.0")
 }
 
 // Configurar la tarea ShadowJar
@@ -62,6 +68,8 @@ tasks.named<ShadowJar>("shadowJar") {
     relocate("org.bstats", "com.github.nationTech.libs.bstats")
     relocate("me.clip.placeholderapi", "com.github.nationTech.libs.placeholderapi")
     relocate("co.aikar.commands", "com.github.nationTech.libs.acf")
+    relocate("net.wesjd.anvilgui", "com.github.nationTech.libs.anvilgui")
+    relocate("com.cjcrafter.foliascheduler", "com.github.nationTech.libs.foliascheduler")
     minimize()
 }
 

@@ -7,6 +7,7 @@ import com.github.nationTech.requirements.Requirement;
 import com.github.nationTech.utils.ComponentUtils;
 import com.palmergames.bukkit.towny.object.Nation;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -37,7 +38,7 @@ public class GUIManager {
         Component title = ComponentUtils.parse("<dark_blue>Seleccionar Árbol Tecnológico");
         Set<String> treeNames = plugin.getTechnologyManager().getTreeNames();
         int size = Math.max(9, (int) (Math.ceil(treeNames.size() / 9.0) * 9));
-        Inventory gui = Bukkit.createInventory(new NationTechHolder(), size, title);
+        Inventory gui = Bukkit.createInventory(new NationTechHolder(), size, LegacyComponentSerializer.legacySection().serialize(title));
 
         for (String treeId : treeNames) {
             boolean isOfficial = treeId.equals(TechnologyManager.OFFICIAL_TREE_ID);
@@ -45,10 +46,12 @@ public class GUIManager {
             String displayName = isOfficial ? "<gold><b>Árbol Oficial</b></gold>" : "<yellow>Borrador: " + treeId;
             ItemStack icon = new ItemStack(iconMaterial);
             ItemMeta meta = icon.getItemMeta();
-            meta.displayName(ComponentUtils.parse(displayName));
-            List<Component> lore = new ArrayList<>();
-            lore.add(ComponentUtils.parse("<gray><!italic>Click para visualizar."));
-            meta.lore(lore);
+            meta.setDisplayName(LegacyComponentSerializer.legacySection().serialize(ComponentUtils.parse(displayName)));
+            List<Component> loreComponets = new ArrayList<>();
+            loreComponets.add(ComponentUtils.parse("<gray><!italic>Click para visualizar."));
+            meta.setLore(loreComponets.stream()
+                    .map(c -> LegacyComponentSerializer.legacySection().serialize(c))
+                    .collect(Collectors.toList()));
             meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
             meta.getPersistentDataContainer().set(TREE_ID_KEY, PersistentDataType.STRING, treeId);
             icon.setItemMeta(meta);
@@ -60,7 +63,7 @@ public class GUIManager {
     public void openNationTechGUI(@NotNull Player player, @NotNull Nation nation, @NotNull String treeId) {
         plugin.getDatabaseManager().getNationUnlockedTechs(nation.getUUID()).thenAccept(unlockedTechs -> {
             Component title = ComponentUtils.parse("<dark_gray>Tecnologías de </dark_gray><gold>" + nation.getName() + "</gold>");
-            Inventory gui = Bukkit.createInventory(new NationTechHolder(), 54, title);
+            Inventory gui = Bukkit.createInventory(new NationTechHolder(), 54, LegacyComponentSerializer.legacySection().serialize(title));
 
             TechnologyManager techManager = plugin.getTechnologyManager();
             Map<String, Technology> techTree = techManager.getTechnologyTree(treeId);
@@ -87,7 +90,7 @@ public class GUIManager {
 
     public void openAdminTechGUI(@NotNull Player player, @NotNull String treeId) {
         Component title = ComponentUtils.parse("<dark_aqua>Vista de Admin: </dark_aqua><yellow>" + treeId + "</yellow>");
-        Inventory gui = Bukkit.createInventory(new NationTechHolder(), 54, title);
+        Inventory gui = Bukkit.createInventory(new NationTechHolder(), 54, LegacyComponentSerializer.legacySection().serialize(title));
 
         TechnologyManager techManager = plugin.getTechnologyManager();
         Map<String, Technology> techTree = techManager.getTechnologyTree(treeId);
@@ -128,14 +131,14 @@ public class GUIManager {
         }
 
         if (isUnlocked) {
-            meta.displayName(ComponentUtils.parse("<green><b><!italic>" + tech.getNombre() + "</b></green>"));
+            meta.setDisplayName(LegacyComponentSerializer.legacySection().serialize(ComponentUtils.parse("<green><b><!italic>" + tech.getNombre() + "</b></green>")));
             loreLines.add("<gold><!italic>¡Desbloqueado!</gold>");
             loreLines.add("");
             loreLines.add("<gray><!italic>Beneficio Obtenido:</gray>");
             loreLines.add("<green><!italic>" + benefitDescription + "</green>");
 
         } else if (parentUnlocked) {
-            meta.displayName(ComponentUtils.parse("<yellow><!italic>" + tech.getNombre() + "</yellow>"));
+            meta.setDisplayName(LegacyComponentSerializer.legacySection().serialize(ComponentUtils.parse("<yellow><!italic>" + tech.getNombre() + "</yellow>")));
             loreLines.add("");
             loreLines.add("<gray><!italic>Requisitos para desbloquear:");
             for (Requirement req : tech.getParsedRequirements()) {
@@ -147,7 +150,7 @@ public class GUIManager {
             loreLines.add("");
             loreLines.add("<yellow><b><!italic>¡Click para intentar desbloquear!");
         } else {
-            meta.displayName(ComponentUtils.parse("<red><!italic>" + tech.getNombre() + "</red>"));
+            meta.setDisplayName(LegacyComponentSerializer.legacySection().serialize(ComponentUtils.parse("<red><!italic>" + tech.getNombre() + "</red>")));
             Technology parentTech = techTree.get(tech.getPadreId());
             String parentName = parentTech != null ? parentTech.getNombre() : "desconocida";
             loreLines.add("");
@@ -158,7 +161,7 @@ public class GUIManager {
             loreLines.add("<green><!italic>" + benefitDescription + "</green>");
         }
 
-        meta.lore(loreLines.stream().map(ComponentUtils::parse).collect(Collectors.toList()));
+        meta.setLore(loreLines.stream().map(l -> LegacyComponentSerializer.legacySection().serialize(ComponentUtils.parse(l))).collect(Collectors.toList()));
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         meta.getPersistentDataContainer().set(TECH_ID_KEY, PersistentDataType.STRING, tech.getId());
         icon.setItemMeta(meta);
@@ -172,7 +175,7 @@ public class GUIManager {
         ItemStack icon = new ItemStack(iconMaterial);
         ItemMeta meta = icon.getItemMeta();
 
-        meta.displayName(ComponentUtils.parse("<aqua><b><!italic>" + tech.getNombre() + "</b></aqua>"));
+        meta.setDisplayName(LegacyComponentSerializer.legacySection().serialize(ComponentUtils.parse("<aqua><b><!italic>" + tech.getNombre() + "</b></aqua>")));
 
         List<String> loreLines = new ArrayList<>();
         loreLines.add("");
@@ -191,7 +194,7 @@ public class GUIManager {
             loreLines.add("<gray><!italic>Beneficio (Cmd): <white>/" + rawReward + "</white></gray>");
         }
 
-        meta.lore(loreLines.stream().map(ComponentUtils::parse).collect(Collectors.toList()));
+        meta.setLore(loreLines.stream().map(l -> LegacyComponentSerializer.legacySection().serialize(ComponentUtils.parse(l))).collect(Collectors.toList()));
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
         icon.setItemMeta(meta);
@@ -227,7 +230,7 @@ public class GUIManager {
     private ItemStack createGuiItem(Material material, String name, int modelData) {
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
-        meta.displayName(ComponentUtils.parse(name));
+        meta.setDisplayName(LegacyComponentSerializer.legacySection().serialize(ComponentUtils.parse(name)));
         if (modelData != 0) { meta.setCustomModelData(modelData); }
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(meta);

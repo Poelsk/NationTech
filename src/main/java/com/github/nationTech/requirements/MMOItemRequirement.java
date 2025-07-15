@@ -1,6 +1,6 @@
 package com.github.nationTech.requirements;
 
-import io.lumine.mythic.lib.api.item.NBTItem;
+import io.lumine.mythic.api.items.*;
 import net.Indyuce.mmoitems.MMOItems;
 import net.Indyuce.mmoitems.ItemStats;
 import net.Indyuce.mmoitems.api.Type;
