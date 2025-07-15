@@ -3,8 +3,8 @@ package com.github.nationTech;
 import com.cjcrafter.foliascheduler.FoliaCompatibility;
 import com.cjcrafter.foliascheduler.ServerImplementation;
 import com.frengor.ultimateadvancementapi.UltimateAdvancementAPI;
-import net.nationtech.commands.NationTechCmd;
-import net.nationtech.gui.tree.AdvancementTreeManager;
+import com.github.nationTech.commands.NationTechCmd;
+import com.github.nationTech.gui.tree.AdvancementTreeManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class NationTech extends JavaPlugin {
