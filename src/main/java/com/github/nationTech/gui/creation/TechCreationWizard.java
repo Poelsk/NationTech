@@ -31,11 +31,7 @@ public class TechCreationWizard {
         new AnvilGUI.Builder()
                 .onComplete((completion) -> {
                     String input = completion.getText().trim();
-                    if (input.isEmpty() |
-
-                            | input.contains(" ") |
-
-                            | TechUtils.technologyExists(input)) {
+                    if (input.isEmpty() || input.contains(" ") || TechUtils.technologyExists(input)) {
                         player.sendMessage(ColorUtils.format("<red>ID inválido, vacío, con espacios o ya existente."));
                         return Collections.singletonList(AnvilGUI.ResponseAction.replaceInputText("Inténtalo de nuevo"));
                     }

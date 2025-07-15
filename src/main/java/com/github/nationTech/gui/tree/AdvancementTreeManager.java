@@ -61,9 +61,7 @@ public class AdvancementTreeManager {
             );
 
             BaseAdvancement advancement;
-            if (parentId == null |
-
-                    | parentId.equalsIgnoreCase("null")) {
+            if (parentId == null || parentId.equalsIgnoreCase("null")) {
                 advancement = new RootAdvancement(techTab, key, display, "textures/gui/advancements/backgrounds/stone.png");
             } else {
                 advancement = new Advancement(key, display);
