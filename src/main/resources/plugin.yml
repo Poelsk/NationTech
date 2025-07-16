@@ -7,7 +7,7 @@ main: com.github.nationTech.NationTech
 # La versión de la API de Paper para la que fue compilado.
 api-version: '1.20'
 # El autor o autores del plugin.
-authors: [WOE]
+authors: [woe]
 # Una breve descripción de lo que hace el plugin.
 description: Un sistema de tecnologías para naciones de Towny.
 
