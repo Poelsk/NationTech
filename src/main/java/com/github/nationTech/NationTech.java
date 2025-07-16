@@ -12,13 +12,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
 
-/**
- * Clase principal del plugin NationTech.
- * Se encarga de la inicialización y desactivación de todos los componentes del plugin.
- *
- * @version 0.0.1-BETA
- * @author TuNombre
- */
 public final class NationTech extends JavaPlugin {
 
     private static NationTech instance;
