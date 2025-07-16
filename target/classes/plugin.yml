@@ -1,0 +1,46 @@
+# El nombre de tu plugin, tal como aparecerá en la lista de plugins del servidor.
+name: NationTech
+# La versión, la tomaremos automáticamente del archivo pom.xml.
+version: 0.1.0-BETA
+# La clase principal que el servidor debe cargar.
+main: com.github.nationTech.NationTech
+# La versión de la API de Paper para la que fue compilado.
+api-version: '1.20'
+# El autor o autores del plugin.
+authors: [WOE]
+# Una breve descripción de lo que hace el plugin.
+description: Un sistema de tecnologías para naciones de Towny.
+
+# Le decimos a nuestro plugin que cargue DESPUÉS de Towny y Vault.
+loadbefore: []
+depend:
+  - Towny
+
+# AÑADIDO: Si Vault existe, nuestro plugin podrá usarlo.
+softdepend:
+  - Vault
+  - MMOitems
+
+# Definición de los comandos del plugin.
+commands:
+  # Comando para jugadores
+  ntc:
+    description: Abre el menú de tecnologías de la nación.
+    usage: "/ntc [nación]"
+    permission: nationtech.user
+  # Comandos de administración
+  ntca:
+    description: Comandos de administración para NationTech.
+    usage: "/ntca <subcomando>"
+    permission: nationtech.admin
+
+# Definición de los permisos del plugin.
+permissions:
+  # Permiso base para usuarios.
+  nationtech.user:
+    description: Permite usar los comandos básicos de NationTech.
+    default: true
+  # Permiso base para administradores.
+  nationtech.admin:
+    description: Permite usar los comandos de administración de NationTech.
+    default: op

@@ -1,0 +1,6 @@
+# Configuración general de NationTech
+
+# URL del paquete de recursos que contiene las texturas personalizadas para la GUI.
+# Los jugadores recibirán una solicitud para descargarlo al entrar al servidor.
+# Deja esto en blanco para no usar ningún paquete de recursos.
+resource-pack-url: ""
