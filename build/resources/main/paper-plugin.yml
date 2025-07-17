@@ -1,0 +1,9 @@
+name: NationTech
+main: com.nationtech.NationTech
+version: 0.1.1-BETA
+api-version: "1.20"
+description: ad
+authors: [Poelsk, Santiago22022]
+depends: []
+softdepends: []
+load: STARTUP

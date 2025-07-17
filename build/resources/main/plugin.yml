@@ -1,0 +1,6 @@
+name: NationTech
+version: 0.1.1-BETA
+main: com.nationtech.NationTech
+api-version: "1.20"
+authors: [Poelsk, Santiago22022]
+description: ad
