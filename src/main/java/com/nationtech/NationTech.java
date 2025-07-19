@@ -1,18 +1,21 @@
 package com.nationtech;
 
-import com.nationtech.tech.Technology;
-import com.nationtech.tech.TechnologyManager;
 import com.nationtech.data.NationDataManager;
-import com.nationtech.listeners.TechnologyPointsListener; // Import the new listener class
+import com.nationtech.listeners.TechnologyPointsListener;
+import com.nationtech.tech.TechnologyManager;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.server.PluginEnableEvent;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.PluginManager; // Import PluginManager
 
-public class NationTech extends JavaPlugin {
+public class NationTech extends JavaPlugin implements Listener {
 
     private static NationTech instance;
     private TechnologyManager technologyManager;
     private NationDataManager nationDataManager;
-    private boolean townyEnabled;
+    private TownyHandler townyHandler;
 
     @Override
     public void onEnable() {
@@ -23,35 +26,44 @@ public class NationTech extends JavaPlugin {
         saveResource("technologies.yml", false);
 
         this.technologyManager = new TechnologyManager(this);
+        this.nationDataManager = new NationDataManager(this);
 
-        // Towny detection
-        if (getServer().getPluginManager().getPlugin("Towny") != null && getServer().getPluginManager().isPluginEnabled("Towny")) {
-            this.townyEnabled = true;
-            getLogger().info("Towny detected. Towny functionalities enabled.");
-            this.nationDataManager = new NationDataManager(this);
-        } else {
-            this.townyEnabled = false;
-            getLogger().warning("Towny not detected, disabling Towny functionalities.");
-        }
+        getServer().getPluginManager().registerEvents(this, this);
 
-        // Register event listeners
+        initializeTownyHandler();
+
         PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(new TechnologyPointsListener(this), this); // <<-- NEW: Register your listener here
+        pm.registerEvents(new TechnologyPointsListener(this), this);
 
         getLogger().info("NationTech has been enabled successfully! Total technologies loaded: " + technologyManager.getAllTechnologies().size());
-        for (Technology tech : technologyManager.getAllTechnologies().values()) {
-            getLogger().info(" - Loaded technology: " + tech.getName() + " (ID: " + tech.getId() + ")");
-        }
     }
 
     @Override
     public void onDisable() {
         getLogger().info("NationTech is disabling...");
-
-        if (townyEnabled && nationDataManager != null) {
+        if (nationDataManager != null) {
             nationDataManager.saveAllNationData();
         }
         getLogger().info("NationTech has been disabled.");
+    }
+
+    private void initializeTownyHandler() {
+        Plugin townyPlugin = getServer().getPluginManager().getPlugin("Towny");
+        if (townyPlugin != null && townyPlugin.isEnabled()) {
+            this.townyHandler = new TownyHandler();
+            getLogger().info("Towny detected. Towny functionalities enabled.");
+        } else {
+            this.townyHandler = null;
+            getLogger().warning("Towny not detected. Towny functionalities will be disabled.");
+        }
+    }
+
+    @EventHandler
+    public void onPluginEnable(PluginEnableEvent event) {
+        if (event.getPlugin().getName().equalsIgnoreCase("Towny")) {
+            getLogger().info("Towny has been enabled, initializing integration...");
+            initializeTownyHandler();
+        }
     }
 
     public static NationTech getInstance() {
@@ -66,7 +78,11 @@ public class NationTech extends JavaPlugin {
         return nationDataManager;
     }
 
-    public boolean isTownyEnabled() {
-        return townyEnabled;
+    public TownyHandler getTownyHandler() {
+        return townyHandler;
+    }
+
+    public boolean isTownyIntegrationEnabled() {
+        return this.townyHandler != null;
     }
 }

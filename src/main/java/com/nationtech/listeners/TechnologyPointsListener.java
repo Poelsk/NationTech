@@ -1,6 +1,7 @@
 package com.nationtech.listeners;
 
 import com.nationtech.NationTech;
+import com.nationtech.TownyHandler;
 import com.nationtech.data.NationTechnologyData;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -8,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public class TechnologyPointsListener implements Listener {
@@ -27,14 +29,25 @@ public class TechnologyPointsListener implements Listener {
         int pointsPerBlock = 5;
 
         if (brokenBlock == targetBlock) {
-            UUID playerUUID = player.getUniqueId();
+            UUID targetUUID = player.getUniqueId();
 
-            NationTechnologyData playerData = plugin.getNationDataManager().getNationData(playerUUID);
-            playerData.addTechnologyPoints(pointsPerBlock);
-            plugin.getNationDataManager().saveNationData(playerUUID);
+            if (plugin.isTownyIntegrationEnabled()) {
+                TownyHandler townyHandler = plugin.getTownyHandler();
+                Optional<UUID> nationUUIDOptional = townyHandler.getNationUUIDFromPlayer(player);
 
-            player.sendMessage("You earned " + pointsPerBlock + " technology points! Total: " + playerData.getTechnologyPoints());
-            plugin.getLogger().info("Player " + player.getName() + " earned " + pointsPerBlock + " points. Total: " + playerData.getTechnologyPoints());
+                if (nationUUIDOptional.isPresent()) {
+                    targetUUID = nationUUIDOptional.get();
+                    player.sendMessage("You earned " + pointsPerBlock + " technology points for your nation!");
+                } else {
+                    player.sendMessage("You must be in a nation to earn points for it. Points will be assigned to you for now.");
+                }
+            } else {
+                player.sendMessage("Towny is not active. Points will be assigned to you.");
+            }
+
+            NationTechnologyData data = plugin.getNationDataManager().getNationData(targetUUID);
+            data.addTechnologyPoints(pointsPerBlock);
+            plugin.getNationDataManager().saveNationData(targetUUID);
         }
     }
 }

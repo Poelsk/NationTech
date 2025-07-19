@@ -1,29 +1,30 @@
 package com.nationtech.data;
 
+import org.bukkit.configuration.file.FileConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class NationTechnologyData {
 
-    private UUID nationUUID;
+    private final UUID ownerUUID;
     private int technologyPoints;
-    private List<String> unlockedTechnologies;
+    private final List<String> unlockedTechnologies;
 
-    public NationTechnologyData(UUID nationUUID) {
-        this.nationUUID = nationUUID;
+    public NationTechnologyData(UUID ownerUUID) {
+        this.ownerUUID = ownerUUID;
         this.technologyPoints = 0;
         this.unlockedTechnologies = new ArrayList<>();
     }
 
-    public NationTechnologyData(UUID nationUUID, int technologyPoints, List<String> unlockedTechnologies) {
-        this.nationUUID = nationUUID;
-        this.technologyPoints = technologyPoints;
-        this.unlockedTechnologies = unlockedTechnologies != null ? new ArrayList<>(unlockedTechnologies) : new ArrayList<>();
+    private NationTechnologyData(UUID ownerUUID, int points, List<String> unlocked) {
+        this.ownerUUID = ownerUUID;
+        this.technologyPoints = points;
+        this.unlockedTechnologies = new ArrayList<>(unlocked);
     }
 
-    public UUID getNationUUID() {
-        return nationUUID;
+    public UUID getOwnerUUID() {
+        return ownerUUID;
     }
 
     public int getTechnologyPoints() {
@@ -31,48 +32,39 @@ public class NationTechnologyData {
     }
 
     public void addTechnologyPoints(int amount) {
-        if (amount > 0) {
-            this.technologyPoints += amount;
-        }
+        this.technologyPoints += amount;
     }
 
-    public void removeTechnologyPoints(int amount) {
-        if (amount > 0) {
-            this.technologyPoints -= amount;
-            if (this.technologyPoints < 0) {
-                this.technologyPoints = 0;
-            }
-        }
+    public boolean hasEnoughPoints(int cost) {
+        return this.technologyPoints >= cost;
+    }
+
+    public void spendPoints(int amount) {
+        this.technologyPoints -= amount;
     }
 
     public List<String> getUnlockedTechnologies() {
         return new ArrayList<>(unlockedTechnologies);
     }
 
-    public boolean isTechnologyUnlocked(String techId) {
-        return unlockedTechnologies.contains(techId);
+    public boolean hasUnlockedTechnology(String techId) {
+        return unlockedTechnologies.contains(techId.toLowerCase());
     }
 
     public void unlockTechnology(String techId) {
-        if (!isTechnologyUnlocked(techId)) {
-            unlockedTechnologies.add(techId);
+        if (!hasUnlockedTechnology(techId)) {
+            unlockedTechnologies.add(techId.toLowerCase());
         }
     }
 
-    public void setTechnologyPoints(int technologyPoints) {
-        this.technologyPoints = technologyPoints;
+    public void save(FileConfiguration config) {
+        config.set("points", technologyPoints);
+        config.set("unlocked", unlockedTechnologies);
     }
 
-    public void setUnlockedTechnologies(List<String> unlockedTechnologies) {
-        this.unlockedTechnologies = unlockedTechnologies != null ? new ArrayList<>(unlockedTechnologies) : new ArrayList<>();
-    }
-
-    @Override
-    public String toString() {
-        return "NationTechnologyData{" +
-                "nationUUID=" + nationUUID +
-                ", technologyPoints=" + technologyPoints +
-                ", unlockedTechnologies=" + unlockedTechnologies.size() + " technologies" +
-                '}';
+    public static NationTechnologyData fromConfiguration(UUID owner, FileConfiguration config) {
+        int points = config.getInt("points", 0);
+        List<String> unlocked = config.getStringList("unlocked");
+        return new NationTechnologyData(owner, points, unlocked);
     }
 }
