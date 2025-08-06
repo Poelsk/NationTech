@@ -1,9 +1,107 @@
 name: NationTech
-version: 0.0.1
 main: com.nationtech.NationTech
-api-version: "1.20"
-authors: [Poelsk, Santiago22022]
-description: Un sistema de tecnología para naciones de Towny.
-softdepend:
-  - Towny
+version: '0.0.10'
+api-version: '1.20'
 load: POSTWORLD
+authors:
+  - Poelsk
+  - Santiago22022
+description: A comprehensive technology tree plugin for Towny nations and individual players.
+
+# Dependencies
+dependencies:
+  - name: Towny
+    required: false
+  - name: UltimateAdvancementAPI
+    required: false
+
+# Commands
+commands:
+  tech:
+    description: Main command for technology management
+    usage: /<command> [subcommand] [args...]
+    aliases: [technology, nationtech]
+    permission: nationtech.use
+    permission-message: "§cYou don't have permission to use this command!"
+
+  techadmin:
+    description: Administrative commands for technology management
+    usage: /<command> [subcommand] [args...]
+    aliases: [nationtechadmin, technologyadmin]
+    permission: nationtech.admin.*
+    permission-message: "§cYou don't have permission to use admin commands!"
+
+# Permissions
+permissions:
+  nationtech.*:
+    description: Grants all NationTech permissions
+    children:
+      nationtech.use: true
+      nationtech.admin.*: true
+    default: op
+
+  nationtech.use:
+    description: Allows basic use of technology commands
+    default: true
+    children:
+      nationtech.command.tech: true
+      nationtech.command.tree: true
+      nationtech.command.info: true
+      nationtech.command.unlock: true
+      nationtech.command.points: true
+      nationtech.command.list: true
+
+  nationtech.admin.*:
+    description: Grants all admin permissions
+    children:
+      nationtech.admin.reload: true
+      nationtech.admin.give: true
+      nationtech.admin.take: true
+      nationtech.admin.unlock: true
+      nationtech.admin.reset: true
+    default: op
+
+  nationtech.admin.reload:
+    description: Allows reloading the plugin configuration
+    default: op
+
+  nationtech.admin.give:
+    description: Allows giving technology points to players/nations
+    default: op
+
+  nationtech.admin.take:
+    description: Allows taking technology points from players/nations
+    default: op
+
+  nationtech.admin.unlock:
+    description: Allows force unlocking technologies for players/nations
+    default: op
+
+  nationtech.admin.reset:
+    description: Allows resetting technology progress for players/nations
+    default: op
+
+  # Individual command permissions
+  nationtech.command.tech:
+    description: Access to main tech command
+    default: true
+
+  nationtech.command.tree:
+    description: Access to technology tree GUI
+    default: true
+
+  nationtech.command.info:
+    description: Access to technology information
+    default: true
+
+  nationtech.command.unlock:
+    description: Access to unlock technologies
+    default: true
+
+  nationtech.command.points:
+    description: Access to view technology points
+    default: true
+
+  nationtech.command.list:
+    description: Access to list technologies
+    default: true

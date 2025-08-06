@@ -1,39 +1,276 @@
+# NationTech Technologies Configuration
+# This file defines all available technologies for your nation/players
+#
+# Structure:
+# technologies:
+#   technology_id:
+#     name: "Display Name"
+#     description: "Technology description"
+#     cost: 50                    # Technology points required
+#     icon: "MATERIAL_NAME"       # Minecraft material for GUI icon
+#     prerequisites: []           # List of required technology IDs
+#     effects: []                 # List of effects (for future implementation)
+
 technologies:
+  # Tier 1 - Basic Technologies (No prerequisites)
   efficient_gathering:
-    name: "Recolección Eficiente"
-    description: "Mejora la eficiencia en la recolección de recursos básicos."
+    name: "Efficient Gathering"
+    description: "Improves basic resource collection efficiency through better tools and techniques."
     cost: 50
+    icon: "IRON_PICKAXE"
     prerequisites: []
     effects:
-      - "bono_velocidad_minado: 10%"
-      - "chance_doble_drop: 5%"
+      - "mining_speed_bonus: 10%"
+      - "double_drop_chance: 5%"
 
+  basic_crafting:
+    name: "Basic Crafting"
+    description: "Unlocks fundamental crafting techniques and improved workbenches."
+    cost: 40
+    icon: "CRAFTING_TABLE"
+    prerequisites: []
+    effects:
+      - "crafting_speed_bonus: 15%"
+      - "recipe_unlock: basic_tools"
+
+  agriculture:
+    name: "Agriculture"
+    description: "Develops farming techniques for sustainable food production."
+    cost: 60
+    icon: "WHEAT"
+    prerequisites: []
+    effects:
+      - "crop_growth_speed: 20%"
+      - "harvest_bonus: 10%"
+
+  # Tier 2 - Advanced Technologies
   advanced_processing:
-    name: "Procesamiento Avanzado"
-    description: "Permite refinar minerales más rápido y desbloquea nuevas aleaciones."
+    name: "Advanced Processing"
+    description: "Enables faster mineral refinement and unlocks new alloy recipes."
     cost: 100
+    icon: "BLAST_FURNACE"
     prerequisites:
       - "efficient_gathering"
+      - "basic_crafting"
     effects:
-      - "velocidad_fundido: 2x"
-      - "desbloquea_receta: acero_avanzado"
+      - "smelting_speed: 2x"
+      - "recipe_unlock: advanced_steel"
+      - "fuel_efficiency: 25%"
 
-  steam_generators:
-    name: "Generadores de Vapor"
-    description: "Desbloquea la construcción de generadores de energía a vapor."
-    cost: 150
+  mechanical_engineering:
+    name: "Mechanical Engineering"
+    description: "Understanding of gears, pulleys, and basic mechanical systems."
+    cost: 120
+    icon: "PISTON"
+    prerequisites:
+      - "basic_crafting"
+    effects:
+      - "redstone_efficiency: 30%"
+      - "contraption_unlock: basic_machines"
+
+  improved_agriculture:
+    name: "Improved Agriculture"
+    description: "Advanced farming techniques including crop rotation and fertilization."
+    cost: 90
+    icon: "BONE_MEAL"
+    prerequisites:
+      - "agriculture"
+    effects:
+      - "crop_yield: 40%"
+      - "animal_breeding_speed: 25%"
+
+  # Tier 3 - Industrial Technologies
+  steam_power:
+    name: "Steam Power"
+    description: "Harnesses the power of steam for advanced machinery and energy generation."
+    cost: 200
+    icon: "CAULDRON"
+    prerequisites:
+      - "advanced_processing"
+      - "mechanical_engineering"
+    effects:
+      - "energy_generation: steam_engines"
+      - "machine_efficiency: 50%"
+      - "unlock_block: steam_generator"
+
+  chemistry:
+    name: "Chemistry"
+    description: "Understanding of chemical processes for advanced materials and explosives."
+    cost: 180
+    icon: "BREWING_STAND"
     prerequisites:
       - "advanced_processing"
     effects:
-      - "desbloquea_bloque: generador_vapor"
-      - "capacidad_energia_base: 500"
+      - "potion_brewing_speed: 2x"
+      - "explosive_crafting: enabled"
+      - "chemical_recipes: unlocked"
 
-  basic_defenses:
-    name: "Defensas Básicas"
-    description: "Permite la construcción de pequeños muros defensivos y torretas simples."
-    cost: 120
+  precision_tools:
+    name: "Precision Tools"
+    description: "Advanced tool manufacturing for specialized tasks and improved efficiency."
+    cost: 150
+    icon: "DIAMOND_PICKAXE"
     prerequisites:
-      - "efficient_gathering"
+      - "mechanical_engineering"
+      - "advanced_processing"
     effects:
-      - "desbloquea_bloque: muro_defensa"
-      - "desbloquea_bloque: torreta_simple"
+      - "tool_durability: +50%"
+      - "precision_crafting: enabled"
+      - "rare_material_extraction: 15%"
+
+  # Tier 4 - Advanced Industrial
+  electricity:
+    name: "Electricity"
+    description: "Harnesses electrical power for lighting, machinery, and communication."
+    cost: 300
+    icon: "REDSTONE_LAMP"
+    prerequisites:
+      - "steam_power"
+      - "chemistry"
+    effects:
+      - "electrical_grid: enabled"
+      - "automated_systems: basic"
+      - "lighting_efficiency: 75%"
+
+  advanced_metallurgy:
+    name: "Advanced Metallurgy"
+    description: "Sophisticated metal working techniques for superior alloys and components."
+    cost: 250
+    icon: "NETHERITE_INGOT"
+    prerequisites:
+      - "precision_tools"
+      - "chemistry"
+    effects:
+      - "alloy_crafting: advanced"
+      - "metal_purity: +30%"
+      - "specialized_components: unlocked"
+
+  mass_production:
+    name: "Mass Production"
+    description: "Industrial-scale manufacturing processes for efficient resource processing."
+    cost: 280
+    icon: "HOPPER"
+    prerequisites:
+      - "steam_power"
+      - "precision_tools"
+    effects:
+      - "production_multiplier: 3x"
+      - "assembly_lines: enabled"
+      - "bulk_processing: unlocked"
+
+  # Defense Technologies
+  basic_defenses:
+    name: "Basic Defenses"
+    description: "Construction of defensive walls, watchtowers, and simple fortifications."
+    cost: 80
+    icon: "COBBLESTONE_WALL"
+    prerequisites:
+      - "basic_crafting"
+    effects:
+      - "defensive_structures: basic"
+      - "wall_reinforcement: +25%"
+      - "watchtower_construction: enabled"
+
+  military_engineering:
+    name: "Military Engineering"
+    description: "Advanced defensive structures and siege equipment."
+    cost: 160
+    icon: "CROSSBOW"
+    prerequisites:
+      - "basic_defenses"
+      - "mechanical_engineering"
+    effects:
+      - "siege_equipment: enabled"
+      - "advanced_fortifications: unlocked"
+      - "defensive_automation: basic"
+
+  gunpowder_weapons:
+    name: "Gunpowder Weapons"
+    description: "Development of firearms and explosive weaponry."
+    cost: 220
+    icon: "TNT"
+    prerequisites:
+      - "chemistry"
+      - "military_engineering"
+    effects:
+      - "firearm_crafting: enabled"
+      - "explosive_weapons: unlocked"
+      - "siege_damage: +100%"
+
+  # Transportation Technologies
+  improved_roads:
+    name: "Improved Roads"
+    description: "Better road construction for faster movement and trade."
+    cost: 70
+    icon: "COBBLESTONE"
+    prerequisites:
+      - "basic_crafting"
+    effects:
+      - "movement_speed: +15%"
+      - "trade_efficiency: +20%"
+      - "road_durability: improved"
+
+  wheeled_transport:
+    name: "Wheeled Transport"
+    description: "Development of carts and wagons for efficient cargo movement."
+    cost: 110
+    icon: "MINECART"
+    prerequisites:
+      - "improved_roads"
+      - "mechanical_engineering"
+    effects:
+      - "cargo_capacity: +50%"
+      - "transport_speed: +25%"
+      - "minecart_efficiency: improved"
+
+  rail_transport:
+    name: "Rail Transport"
+    description: "Advanced rail systems for rapid long-distance transportation."
+    cost: 240
+    icon: "POWERED_RAIL"
+    prerequisites:
+      - "wheeled_transport"
+      - "steam_power"
+    effects:
+      - "rail_speed: +100%"
+      - "automated_transport: enabled"
+      - "cargo_networks: unlocked"
+
+  # Research and Knowledge
+  library_science:
+    name: "Library Science"
+    description: "Organized knowledge storage and research methodologies."
+    cost: 90
+    icon: "BOOKSHELF"
+    prerequisites:
+      - "basic_crafting"
+    effects:
+      - "research_speed: +20%"
+      - "knowledge_preservation: enabled"
+      - "tech_point_bonus: +5%"
+
+  scientific_method:
+    name: "Scientific Method"
+    description: "Systematic approach to research and experimentation."
+    cost: 180
+    icon: "GLASS_BOTTLE"
+    prerequisites:
+      - "library_science"
+      - "chemistry"
+    effects:
+      - "research_efficiency: +40%"
+      - "experiment_success_rate: +25%"
+      - "innovation_bonus: enabled"
+
+  advanced_research:
+    name: "Advanced Research"
+    description: "Cutting-edge research facilities and methodologies."
+    cost: 350
+    icon: "ENCHANTING_TABLE"
+    prerequisites:
+      - "scientific_method"
+      - "electricity"
+    effects:
+      - "tech_point_generation: +50%"
+      - "research_automation: enabled"
+      - "breakthrough_chance: +15%"

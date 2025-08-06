@@ -43,6 +43,10 @@
             <id>dmulloy2-repo</id>
             <url>https://repo.dmulloy2.net/repository/public/</url>
         </repository>
+            <repository>
+                <id>fren_gor</id>
+                <url>https://nexus.frengor.com/repository/public/</url>
+            </repository>
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
@@ -60,6 +64,12 @@
             <groupId>com.github.TownyAdvanced</groupId>
             <artifactId>Towny</artifactId>
             <version>0.101.1.10</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.frengor</groupId>
+            <artifactId>ultimateadvancementapi</artifactId>
+            <version>2.5.2</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

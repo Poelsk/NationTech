@@ -1,0 +1,140 @@
+#
+#     ███╗  ██╗ █████╗ ████████╗██╗ ██████╗ ███╗  ██╗
+#     ████╗ ██║██╔══██╗╚══██╔══╝██║██╔═══██╗████╗ ██║
+#     ██╔██╗██║███████║   ██║   ██║██║   ██║██╔██╗██║
+#     ██║╚████║██╔══██║   ██║   ██║██║   ██║██║╚████║
+#     ██║ ╚███║██║  ██║   ██║   ██║╚██████╔╝██║ ╚███║
+#     ╚═╝  ╚══╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚══╝
+#
+#     ████████╗███████╗ ██████╗██╗  ██╗
+#     ╚══██╔══╝██╔════╝██╔════╝██║  ██║
+#        ██║   █████╗  ██║     ███████║
+#        ██║   ██╔══╝  ██║     ██╔══██║
+#        ██║   ███████╗╚██████╗██║  ██║
+#        ╚═╝   ╚══════╝ ╚═════╝╚═╝  ╚═╝
+#
+# ════════════════════════════════════════════════════════════════════
+# 🔬 Technology Tree Plugin for Minecraft Nations 🔬
+# ════════════════════════════════════════════════════════════════════
+# Version: 0.0.10          Authors: Poelsk & Santiago22022
+# GitHub: https://github.com/Poelsk/NationTech-releases
+# ════════════════════════════════════════════════════════════════════
+# This file contains the main configuration for the NationTech plugin
+
+# General Settings
+general:
+  # Plugin language (for future localization support)
+  language: "en"
+
+  # Enable debug logging
+  debug: false
+
+  # Auto-save interval in minutes (0 to disable)
+  auto_save_interval: 5
+
+# Technology Point Settings
+technology_points:
+  # Starting points for new players/nations
+  starting_points: 10
+
+  # Maximum points that can be stored (0 for unlimited)
+  max_points: 10000
+
+  # Point sources and their values
+  sources:
+    # Points gained from mining different ores
+    mining:
+      COAL_ORE: 1
+      IRON_ORE: 5
+      GOLD_ORE: 10
+      DIAMOND_ORE: 25
+      EMERALD_ORE: 30
+      ANCIENT_DEBRIS: 50
+      # Deepslate variants
+      DEEPSLATE_COAL_ORE: 2
+      DEEPSLATE_IRON_ORE: 6
+      DEEPSLATE_GOLD_ORE: 12
+      DEEPSLATE_DIAMOND_ORE: 30
+      DEEPSLATE_EMERALD_ORE: 35
+
+    # Points gained from farming (per harvest)
+    farming:
+      WHEAT: 1
+      CARROTS: 1
+      POTATOES: 1
+      BEETROOTS: 1
+      NETHER_WART: 3
+
+    # Points gained from killing mobs
+    mob_kills:
+      ZOMBIE: 2
+      SKELETON: 2
+      CREEPER: 3
+      SPIDER: 2
+      ENDERMAN: 5
+      WITHER_SKELETON: 10
+      BLAZE: 8
+      GHAST: 12
+      ENDER_DRAGON: 500
+      WITHER: 300
+
+# Towny Integration Settings
+towny:
+  # Enable Towny integration (auto-detected if disabled)
+  enabled: true
+
+  # Use nation technology points instead of individual player points
+  use_nation_points: true
+
+  # Allow players without nations to use individual points
+  fallback_to_individual: true
+
+  # Require players to be in a town to gain nation points
+  require_town_membership: true
+
+# GUI Settings
+gui:
+  # Enable UltimateAdvancementAPI integration
+  advancement_gui: true
+
+  # Technology tree title
+  tree_title: "Technology Tree"
+
+  # Update GUI automatically when technologies are unlocked
+  auto_update: true
+
+# Notifications
+notifications:
+  # Send messages when points are gained
+  point_gain_messages: true
+
+  # Send messages when technologies are unlocked
+  tech_unlock_messages: true
+
+  # Broadcast nation technology unlocks to all nation members
+  broadcast_nation_unlocks: true
+
+  # Send title/subtitle for important events
+  use_titles: true
+
+# Performance Settings
+performance:
+  # Cache technology data in memory
+  cache_tech_data: true
+
+  # Batch save operations (better for servers with many players)
+  batch_saves: true
+
+  # Save data asynchronously (recommended for large servers)
+  async_saves: true
+
+# Development/Debug Settings
+development:
+  # Allow reloading technologies without restart
+  allow_hot_reload: true
+
+  # Log all technology point transactions
+  log_point_transactions: false
+
+  # Detailed error reporting
+  verbose_errors: false

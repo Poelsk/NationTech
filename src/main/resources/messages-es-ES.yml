@@ -1,0 +1,176 @@
+#
+#     ███╗  ██╗ █████╗ ████████╗██╗ ██████╗ ███╗  ██╗
+#     ████╗ ██║██╔══██╗╚══██╔══╝██║██╔═══██╗████╗ ██║
+#     ██╔██╗██║███████║   ██║   ██║██║   ██║██╔██╗██║
+#     ██║╚████║██╔══██║   ██║   ██║██║   ██║██║╚████║
+#     ██║ ╚███║██║  ██║   ██║   ██║╚██████╔╝██║ ╚███║
+#     ╚═╝  ╚══╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚══╝
+#
+#     ████████╗███████╗ ██████╗██╗  ██╗
+#     ╚══██╔══╝██╔════╝██╔════╝██║  ██║
+#        ██║   █████╗  ██║     ███████║
+#        ██║   ██╔══╝  ██║     ██╔══██║
+#        ██║   ███████╗╚██████╗██║  ██║
+#        ╚═╝   ╚══════╝ ╚═════╝╚═╝  ╚═╝
+#
+# ════════════════════════════════════════════════════════════════════
+# 🇪🇸 ARCHIVO DE IDIOMA ESPAÑOL 🇪🇸
+# ════════════════════════════════════════════════════════════════════
+# Versión: 0.0.10          Autores: Poelsk & Santiago22022
+# Idioma: es-ES           Codificación: UTF-8
+# ════════════════════════════════════════════════════════════════════
+
+# Información del Plugin
+plugin:
+  name: "NationTech"
+  prefix: "&8[&6NationTech&8]&r "
+  version: "0.1.0"
+
+# Mensajes Generales
+general:
+  no_permission: "&c¡No tienes permisos para usar este comando!"
+  player_only: "&c¡Este comando solo puede ser usado por jugadores!"
+  player_not_found: "&c¡Jugador '{player}' no encontrado!"
+  invalid_number: "&cNúmero inválido: {input}"
+  command_usage: "&cUso: {usage}"
+  success: "&a¡Éxito!"
+  error: "&c¡Error!"
+  warning: "&e¡Advertencia!"
+
+# Puntos de Tecnología
+points:
+  current: "&6Puntos de Tecnología: &e{points}"
+  current_context: "&6Puntos de Tecnología ({context}): &e{points}"
+  gained: "&a+&e{points}&a puntos de tecnología {context}! &7(Total: {total})"
+  gained_mining: "&a+&e{points}&a puntos de tecnología por minería {context}! &7(Total: {total})"
+  gained_farming: "&a+&e{points}&a puntos de tecnología por agricultura {context}! &7(Total: {total})"
+  gained_combat: "&a+&e{points}&a puntos de tecnología por combate {context}! &7(Total: {total})"
+  not_enough: "&c¡No tienes suficientes puntos de tecnología! Necesitas {required} puntos pero tienes {current}."
+  max_reached: "&c¡Los puntos de tecnología han alcanzado la capacidad máxima ({max})!"
+  context:
+    personal: "personalmente"
+    nation: "para tu nación"
+
+# Tecnologías
+technology:
+  not_found: "&c¡Tecnología '{tech}' no encontrada!"
+  already_unlocked: "&c¡La tecnología '{tech}' ya está desbloqueada!"
+  unlocked: "&a¡Tecnología '{tech}' desbloqueada exitosamente!"
+  spent_points: "&7Gastaste {points} puntos. Restantes: {remaining}"
+  prerequisite_missing: "&c¡Debes desbloquear '{prereq}' primero!"
+  unlocked_count: "&7Tecnologías desbloqueadas: {count}"
+
+  # Información de Tecnología
+  info:
+    header: "&6=== Información de Tecnología ==="
+    id: "&eID: &f{id}"
+    name: "&eNombre: &f{name}"
+    description: "&eDescripción: &f{description}"
+    cost: "&eCosto: &f{cost} puntos"
+    unlocked: "&eDesbloqueada: {status}"
+    prerequisites: "&eRequisitos previos:"
+    prerequisite_item: "  &7- {name} {status}"
+    no_prerequisites: "&7Ninguno"
+
+  # Lista de Tecnologías
+  list:
+    header: "&6=== Tecnologías Disponibles ==="
+    item: "&7- &f{name} &7({cost} pts) {status}"
+    status:
+      unlocked: "&a✓ Desbloqueada"
+      available: "&e⚡ Disponible"
+      locked: "&c✗ Bloqueada"
+
+# Mensajes de GUI
+gui:
+  tree_opened: "&a¡Árbol de tecnología abierto!"
+  tree_failed: "&cError al abrir el árbol de tecnología: {error}"
+  not_available: "&cLa GUI de tecnología no está disponible. Por favor contacta a un administrador."
+
+# Comandos
+commands:
+  # Ayuda del Comando Principal
+  help:
+    header: "&6=== Comandos de NationTech ==="
+    tree: "&e/tech tree &7- Abrir la GUI del árbol de tecnología"
+    info: "&e/tech info <tech_id> &7- Mostrar información de tecnología"
+    unlock: "&e/tech unlock <tech_id> &7- Desbloquear una tecnología"
+    points: "&e/tech points &7- Mostrar tus puntos de tecnología"
+    list: "&e/tech list &7- Listar todas las tecnologías disponibles"
+    reload: "&e/tech reload &7- Recargar la configuración del plugin"
+
+  # Ayuda de Comandos de Admin
+  admin_help:
+    header: "&6=== Comandos de Admin de NationTech ==="
+    give: "&e/techadmin give <jugador> <puntos> &7- Dar puntos de tecnología"
+    take: "&e/techadmin take <jugador> <puntos> &7- Quitar puntos de tecnología"
+    set: "&e/techadmin set <jugador> <puntos> &7- Establecer puntos de tecnología"
+    unlock: "&e/techadmin unlock <jugador> <tech> &7- Forzar desbloqueo de tecnología"
+    reset: "&e/techadmin reset <jugador> &7- Reiniciar todo el progreso"
+    info: "&e/techadmin info <jugador> &7- Mostrar información del jugador"
+    reload: "&e/techadmin reload &7- Recargar configuración del plugin"
+
+# Mensajes de Admin
+admin:
+  gave_points: "&aSe dieron {points} puntos de tecnología a {player} ({old} → {new})"
+  took_points: "&aSe quitaron {points} puntos de tecnología a {player} ({old} → {new})"
+  set_points: "&aSe establecieron {points} puntos de tecnología para {player} (antes {old})"
+  force_unlocked: "&aSe desbloqueó forzadamente '{tech}' para {player}"
+  already_unlocked: "&c¡{player} ya tiene '{tech}' desbloqueado!"
+  reset_progress: "&aSe reinició el progreso de {player}: {points} puntos y {techs} tecnologías eliminadas"
+  points_must_positive: "&c¡Los puntos deben ser un número positivo!"
+  points_cannot_negative: "&c¡Los puntos no pueden ser negativos!"
+
+  # Notificaciones al Jugador (cuando las acciones de admin les afectan)
+  received_points: "&a¡Recibiste {points} puntos de tecnología de un administrador!"
+  lost_points: "&c¡{points} puntos de tecnología fueron removidos por un administrador!"
+  points_set: "&e¡Tus puntos de tecnología fueron establecidos a {points} por un administrador!"
+  tech_unlocked: "&a¡La tecnología '{tech}' fue desbloqueada por un administrador!"
+  progress_reset: "&c¡Tu progreso de tecnología fue reiniciado por un administrador!"
+
+# Información del Jugador (Comando de Admin)
+player_info:
+  header: "&6=== Info de Tecnología: {player} ==="
+  points: "&ePuntos: &f{points}"
+  unlocked_count: "&eTecnologías Desbloqueadas: &f{count}"
+  technologies: "&eTecnologías:"
+  tech_item: "  &7- {name} &8({id})"
+  context: "&eContexto: &f{context}"
+  context_types:
+    personal: "Personal"
+    nation: "Nación"
+
+# Integración con Towny
+towny:
+  no_nation: "&cDebes estar en una nación para ganar puntos para ella. Los puntos se asignarán a ti por ahora."
+  nation_points: "&a¡Ganaste {points} puntos de tecnología para tu nación!"
+  towny_inactive: "&eTowny no está activo. Los puntos se asignarán a ti."
+  nation_unlock_broadcast: "&6[Nación] &a¡{player} desbloqueó '{tech}' para la nación!"
+
+# Mensajes de Recarga
+reload:
+  success: "&a¡Plugin recargado exitosamente!"
+  failed: "&cError al recargar plugin: {error}"
+  config_reloaded: "&a¡Configuración recargada exitosamente!"
+
+# Mensajes de Error
+errors:
+  technology_load_failed: "&c¡Error al cargar tecnologías desde la configuración!"
+  data_save_failed: "&c¡Error al guardar datos para {target}!"
+  gui_init_failed: "&c¡Error al inicializar la GUI de tecnología!"
+  towny_integration_failed: "&c¡Error en la integración con Towny!"
+  advancement_api_failed: "&c¡Error en la integración con UltimateAdvancementAPI!"
+
+# Mensajes de Estado
+status:
+  enabled: "&a¡NationTech ha sido habilitado exitosamente!"
+  disabled: "&eNationTech ha sido deshabilitado."
+  technologies_loaded: "&aTotal de tecnologías cargadas: {count}"
+  data_loaded: "&aTotal de datos de nación/jugador cargados: {count}"
+  saving_data: "&eGuardando todos los datos de nación..."
+  data_saved: "&aTodos los datos de nación guardados."
+
+# Mensajes de Finalización
+completion:
+  percentage: "&eCompletado: &f{percentage}%"
+  fully_completed: "&a🎉 ¡Árbol de tecnología completado! 🎉"

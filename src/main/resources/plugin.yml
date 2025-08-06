@@ -1,9 +1,0 @@
-name: NationTech
-version: 0.0.1
-main: com.nationtech.NationTech
-api-version: "1.20"
-authors: [Poelsk, Santiago22022]
-description: asd
-softdepend:
-  - Towny
-load: POSTWORLD

@@ -15,12 +15,14 @@ repositories {
     maven("https://oss.sonatype.org/content/groups/public/")
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://repo.dmulloy2.net/repository/public/")
+    maven("https://nexus.frengor.com/repository/public/")
     maven("https://jitpack.io")
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
     compileOnly("com.github.TownyAdvanced:Towny:0.101.1.10")
+    implementation("com.frengor:ultimateadvancementapi:2.5.0")
 }
 
 tasks.named<ShadowJar>("shadowJar") {

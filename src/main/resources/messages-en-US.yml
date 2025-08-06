@@ -1,0 +1,176 @@
+#
+#     ███╗  ██╗ █████╗ ████████╗██╗ ██████╗ ███╗  ██╗
+#     ████╗ ██║██╔══██╗╚══██╔══╝██║██╔═══██╗████╗ ██║
+#     ██╔██╗██║███████║   ██║   ██║██║   ██║██╔██╗██║
+#     ██║╚████║██╔══██║   ██║   ██║██║   ██║██║╚████║
+#     ██║ ╚███║██║  ██║   ██║   ██║╚██████╔╝██║ ╚███║
+#     ╚═╝  ╚══╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚══╝
+#
+#     ████████╗███████╗ ██████╗██╗  ██╗
+#     ╚══██╔══╝██╔════╝██╔════╝██║  ██║
+#        ██║   █████╗  ██║     ███████║
+#        ██║   ██╔══╝  ██║     ██╔══██║
+#        ██║   ███████╗╚██████╗██║  ██║
+#        ╚═╝   ╚══════╝ ╚═════╝╚═╝  ╚═╝
+#
+# ════════════════════════════════════════════════════════════════════
+# 🇺🇸 ENGLISH (US) LANGUAGE FILE 🇺🇸
+# ════════════════════════════════════════════════════════════════════
+# Version: 0.0.10          Authors: Poelsk & Santiago22022
+# Language: en-US          Encoding: UTF-8
+# ════════════════════════════════════════════════════════════════════
+
+# Plugin Information
+plugin:
+  name: "NationTech"
+  prefix: "&8[&6NationTech&8]&r "
+  version: "0.1.0"
+
+# General Messages
+general:
+  no_permission: "&cYou don't have permission to use this command!"
+  player_only: "&cThis command can only be used by players!"
+  player_not_found: "&cPlayer '{player}' not found!"
+  invalid_number: "&cInvalid number: {input}"
+  command_usage: "&cUsage: {usage}"
+  success: "&aSuccess!"
+  error: "&cError!"
+  warning: "&eWarning!"
+
+# Technology Points
+points:
+  current: "&6Technology Points: &e{points}"
+  current_context: "&6Technology Points ({context}): &e{points}"
+  gained: "&a+&e{points}&a technology points {context}! &7(Total: {total})"
+  gained_mining: "&a+&e{points}&a technology points from mining {context}! &7(Total: {total})"
+  gained_farming: "&a+&e{points}&a technology points from farming {context}! &7(Total: {total})"
+  gained_combat: "&a+&e{points}&a technology points from combat {context}! &7(Total: {total})"
+  not_enough: "&cNot enough technology points! You need {required} points but have {current}."
+  max_reached: "&cTechnology points are at maximum capacity ({max})!"
+  context:
+    personal: "personally"
+    nation: "for your nation"
+
+# Technologies
+technology:
+  not_found: "&cTechnology '{tech}' not found!"
+  already_unlocked: "&cTechnology '{tech}' is already unlocked!"
+  unlocked: "&aTechnology '{tech}' unlocked successfully!"
+  spent_points: "&7Spent {points} points. Remaining: {remaining}"
+  prerequisite_missing: "&cYou must unlock '{prereq}' first!"
+  unlocked_count: "&7Unlocked technologies: {count}"
+
+  # Technology Info Display
+  info:
+    header: "&6=== Technology Information ==="
+    id: "&eID: &f{id}"
+    name: "&eName: &f{name}"
+    description: "&eDescription: &f{description}"
+    cost: "&eCost: &f{cost} points"
+    unlocked: "&eUnlocked: {status}"
+    prerequisites: "&ePrerequisites:"
+    prerequisite_item: "  &7- {name} {status}"
+    no_prerequisites: "&7None"
+
+  # Technology List
+  list:
+    header: "&6=== Available Technologies ==="
+    item: "&7- &f{name} &7({cost} pts) {status}"
+    status:
+      unlocked: "&a✓ Unlocked"
+      available: "&e⚡ Available"
+      locked: "&c✗ Locked"
+
+# GUI Messages
+gui:
+  tree_opened: "&aTechnology tree opened!"
+  tree_failed: "&cFailed to open technology tree: {error}"
+  not_available: "&cTechnology GUI is not available. Please contact an administrator."
+
+# Commands
+commands:
+  # Main Command Help
+  help:
+    header: "&6=== NationTech Commands ==="
+    tree: "&e/tech tree &7- Open the technology tree GUI"
+    info: "&e/tech info <tech_id> &7- Show technology information"
+    unlock: "&e/tech unlock <tech_id> &7- Unlock a technology"
+    points: "&e/tech points &7- Show your technology points"
+    list: "&e/tech list &7- List all available technologies"
+    reload: "&e/tech reload &7- Reload the plugin configuration"
+
+  # Admin Command Help
+  admin_help:
+    header: "&6=== NationTech Admin Commands ==="
+    give: "&e/techadmin give <player> <points> &7- Give technology points"
+    take: "&e/techadmin take <player> <points> &7- Take technology points"
+    set: "&e/techadmin set <player> <points> &7- Set technology points"
+    unlock: "&e/techadmin unlock <player> <tech> &7- Force unlock technology"
+    reset: "&e/techadmin reset <player> &7- Reset all progress"
+    info: "&e/techadmin info <player> &7- Show player information"
+    reload: "&e/techadmin reload &7- Reload plugin configuration"
+
+# Admin Messages
+admin:
+  gave_points: "&aGave {points} technology points to {player} ({old} → {new})"
+  took_points: "&aTook {points} technology points from {player} ({old} → {new})"
+  set_points: "&aSet {player}'s technology points to {points} (was {old})"
+  force_unlocked: "&aForce unlocked '{tech}' for {player}"
+  already_unlocked: "&c{player} already has '{tech}' unlocked!"
+  reset_progress: "&aReset {player}'s progress: {points} points and {techs} technologies removed"
+  points_must_positive: "&cPoints must be a positive number!"
+  points_cannot_negative: "&cPoints cannot be negative!"
+
+  # Player Notifications (when admin actions affect them)
+  received_points: "&aYou received {points} technology points from an administrator!"
+  lost_points: "&c{points} technology points were removed by an administrator!"
+  points_set: "&eYour technology points were set to {points} by an administrator!"
+  tech_unlocked: "&aTechnology '{tech}' was unlocked by an administrator!"
+  progress_reset: "&cYour technology progress was reset by an administrator!"
+
+# Player Info Display (Admin Command)
+player_info:
+  header: "&6=== Technology Info: {player} ==="
+  points: "&ePoints: &f{points}"
+  unlocked_count: "&eUnlocked Technologies: &f{count}"
+  technologies: "&eTechnologies:"
+  tech_item: "  &7- {name} &8({id})"
+  context: "&eContext: &f{context}"
+  context_types:
+    personal: "Personal"
+    nation: "Nation"
+
+# Towny Integration
+towny:
+  no_nation: "&cYou must be in a nation to earn points for it. Points will be assigned to you for now."
+  nation_points: "&aYou earned {points} technology points for your nation!"
+  towny_inactive: "&eTowny is not active. Points will be assigned to you."
+  nation_unlock_broadcast: "&6[Nation] &a{player} unlocked '{tech}' for the nation!"
+
+# Reload Messages
+reload:
+  success: "&aPlugin reloaded successfully!"
+  failed: "&cError reloading plugin: {error}"
+  config_reloaded: "&aConfiguration reloaded successfully!"
+
+# Error Messages
+errors:
+  technology_load_failed: "&cFailed to load technologies from config!"
+  data_save_failed: "&cFailed to save data for {target}!"
+  gui_init_failed: "&cFailed to initialize technology GUI!"
+  towny_integration_failed: "&cTowny integration failed!"
+  advancement_api_failed: "&cUltimateAdvancementAPI integration failed!"
+
+# Status Messages
+status:
+  enabled: "&aNationTech has been enabled successfully!"
+  disabled: "&eNationTech has been disabled."
+  technologies_loaded: "&aTotal technologies loaded: {count}"
+  data_loaded: "&aTotal nation/player data loaded: {count}"
+  saving_data: "&eSaving all nation data..."
+  data_saved: "&aAll nation data saved."
+
+# Completion Messages
+completion:
+  percentage: "&eCompletion: &f{percentage}%"
+  fully_completed: "&a🎉 Technology tree completed! 🎉"
